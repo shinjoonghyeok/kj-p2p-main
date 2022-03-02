@@ -1,0 +1,59 @@
+//
+// generated from "ErrorCodes.pd"
+//
+
+module.exports = new function () {
+    this.ERR = {
+        OK: 0,
+        FAIL: 1,
+
+        REQ_PARAMETER_WRONG: 2,
+
+        SQL_FAIL: 10,
+        SQL_FAIL_SELECT: 11,
+        SQL_FAIL_INSERT: 12,
+        SQL_FAIL_UPDATE: 13,
+        CACHE_FAIL: 14,
+        CACHE_FAIL_READ: 15,
+        CACHE_FAIL_WRITE: 16,
+        SQL_FAIL_TRANSACTION_ROLLBACK: 17,
+        DB_EXCEPTION: 18,
+        CACHE_EXCEPTION: 19,
+
+        UNDER_MAINTENANCE: 20,
+
+        NO_UID: 30,
+        NO_EMAIL: 31,
+        WRONG_TOKEN_OR_PASSWORD: 32,
+        UID_TOKEN_EXPIRED: 33,
+        UID_TOKEN_EMPTY: 34,
+
+        NO_PRODUCT: 34,
+        NO_INVEST: 35,
+        NO_COIN: 36,
+        NO_REFERAL: 37,
+        NO_P2P: 38, //
+        NOT_YOURS: 39,
+        NOT_MANAGER: 40,
+        NOT_KYC: 41,
+
+        NO_PUBLISHER_ACCOUNT: 120,
+        PASSWORD_WRONG: 121,
+        PUBLISHER_ACCOUNT_EXPIRED: 122,
+        PUBLISHER_ACCOUNT_API_ACCESS_TOKOEN_WRONG: 123,
+        PUBLISHER_ACCOUNT_API_ACCESS_TOKOEN_EXPIRED: 124,
+        PUBLISHER_ACCOUNT_API_ACCESS_TOKOEN_NO_PERMIT: 125,
+        PUBLISHER_ACCOUNT_NOT_ALLOWED: 126,
+
+        PUBLISHER_NOT_ENOUGH_CREDIT: 150,
+        USER_ID_NOT_ENOUGH_CREDIT: 151,
+
+        GM__NO_ACCOUNT: 152,
+        GM__WRONG_PASSWORD: 153,
+        GM__ALREADY_ACCOUNT: 154,
+        GM__NO_PERMIT: 155,
+        GM__NO_GAME_GLOBAL_VARIABLES: 156,
+        GM__NOT_NORMAL_STATUS: 157
+
+    }
+}()

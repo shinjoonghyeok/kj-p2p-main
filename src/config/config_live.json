@@ -1,0 +1,98 @@
+{
+    "TitleName": "Framework",
+    "server": {
+        "version": "v1",
+        "host": "localhost",
+        "port": 21301,
+        "jwt_Secret": "Fk}gtg7S35343F/P:[SzZ",
+        "jwt_exp": 31536000,
+        "jwt_exp_example": "31536000 = 60*60*24*365",
+        "jwt_exp_example2": "3600 = 60*60",
+        "option": {
+            "statistics": "on"
+        },
+        "swagger": {
+            "switch": "on",
+            "port": 21302
+        },
+        "kj": {
+            "customer": {                
+                "certImages": "upload/certImg/"
+                ,"claim": "upload/claim/"
+            },            
+            "BTC": {
+                
+                "url": "http://54.179.8.229:3000",
+                "host": "54.179.8.229",
+                "port": 3000,
+                "transaction_check_interval_msec": 60000
+            },
+            "ETH": {
+                "url": "http://54.254.209.130:3000"
+            }
+        }
+    },    
+    "db": [
+        {
+            "name": "p2p",
+            "host": "18.141.174.133",
+            "port": 3306,
+            "user": "kjuser",
+            "password": "3dnjf20dlf",
+            "database": "kjp2p"
+        },
+        {
+            "name": "invest",
+            "host": "18.136.106.168",
+            "port": 3306,
+            "user": "kjuser",
+            "password": "3dnjf20dlf",
+            "database": "kjinvest"
+        }
+    ],
+    "mdb": [
+        {
+            "name": "servers",
+            "host": "localhost",
+            "port": 6379,
+            "select": 0,
+            "prefix": {
+                "usersession": "usersession:",
+                "roommanager": "roommanager:",
+                "maintenance": "maintenance:"
+            }
+        },
+        {
+            "name": "users",
+            "host": "localhost",
+            "port": 6379,
+            "select": 1,
+            "prefix": {
+                "users": "user:"
+            }
+        },
+        {
+            "name": "btc",
+            "host": "localhost",
+            "port": 6379,
+            "select": 2,
+            "prefix": {
+                "btc": "btc:"
+            }
+        },
+        {
+            "name": "eth",
+            "host": "localhost",
+            "port": 6379,
+            "select": 3,
+            "prefix": {
+                "eth": "eth:"
+            }
+        },
+        {
+            "name": "pub",
+            "host": "localhost",
+            "port": 6379
+        }
+    ]
+}

@@ -1,0 +1,456 @@
+
+paths:
+  "/basic/symbol/insert":
+    post:
+      tags:
+      - basic
+      summary: 통화쌍을 등록한다.
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              "$ref": "#/definitions/Symbol"
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+  "/basic/symbol/update":
+    post:
+      tags:
+      - basic
+      summary: 통화쌍 정보를 수정한다.
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              "$ref": "#/definitions/Symbol"
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+
+
+
+  "/basic/symbol/select/{symbol}":
+    parameters:
+    - name: symbol
+      in: path
+      required: true
+      description: 통화쌍
+      type: string
+    get:
+      tags:
+      - basic
+      summary: 통화쌍 정보를 가져온다.
+      description: ''      
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      security:
+      - idtoken: []
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+
+  "/basic/symbol/list":
+    get:
+      tags:
+      - basic
+      summary: 통화쌍을 조회한다.
+      description: ''      
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      security:
+      - idtoken: []
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+
+  "/basic/symbol/requireBank":
+    parameters:
+    - name: symbol
+      in: query
+      required: true
+      description: 통화쌍
+      type: string  
+    - name: orderSide
+      in: query
+      required: true
+      description: "B:Buy, S:Sell"
+      type: string  
+    get:
+      tags:
+      - basic
+      summary: 통화쌍을 조회한다.
+      description: ''      
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      security:
+      - idtoken: []
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+
+  "/basic/currency/insert":
+    post:
+      tags:
+      - basic
+      summary: 코인 정보를 입력한다.
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              "$ref": "#/definitions/Currency"
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+  "/basic/currency/update":
+    post:
+      tags:
+      - basic
+      summary: 코인 정보를 수정한다.
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              "$ref": "#/definitions/Currency"
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+
+
+
+  "/basic/currency/select/{coin}":
+    parameters:
+    - name: coin
+      in: path
+      required: true
+      description: 코인
+      type: string
+    get:
+      tags:
+      - basic
+      summary: 코인 정보를 가져온다.
+      description: ''      
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      security:
+      - idtoken: []
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+
+  "/basic/currency/list":
+    get:
+      tags:
+      - basic
+      summary: 코인을 조회한다.
+      description: ''      
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      security:
+      - idtoken: []
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+
+
+
+          
+  "/basic/board/insert":
+    post:
+      tags:
+      - basic
+      summary: 게시판 정보를 입력한다.
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              "$ref": "#/definitions/Board"
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+  "/basic/board/update":
+    post:
+      tags:
+      - basic
+      summary: 게시판 정보를 수정한다.
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              "$ref": "#/definitions/Board"
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+  "/basic/board/list":
+    get:
+      tags:
+      - basic
+      summary: 게시판 정보를 조회한다.
+      description: ''      
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      security:
+      - idtoken: []
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+
+
+  "/basic/board/{boardCode}/insert":
+    parameters:
+    - name: boardCode
+      in: path
+      required: true
+      description: 게시판코드
+      type: string
+    post:
+      tags:
+      - basic
+      summary: 게시판 글을 등록한다.
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              "$ref": "#/definitions/Article"
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+  "/basic/board/{boardCode}/update":
+    parameters:
+    - name: boardCode
+      in: path
+      required: true
+      description: 게시판코드
+      type: string    
+    post:
+      tags:
+      - basic
+      summary: 게시판 글을 수정한다.
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              "$ref": "#/definitions/Article"
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+
+
+
+  "/basic/board/{boardCode}/select/{articleIdx}":
+    parameters:
+    - name: boardCode
+      in: path
+      required: true
+      description: 게시판코드
+      type: string
+    - name: articleIdx
+      in: path
+      required: true
+      description: 글번호
+      type: int
+    get:
+      tags:
+      - basic
+      summary: 게시판 글을 가져온다.
+      description: ''      
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+
+  "/basic/board/{boardCode}/list":
+    parameters:
+    - name: boardCode
+      in: path
+      required: true
+      description: 게시판코드
+      type: string
+    - name: searchKey
+      in: query
+      required: false
+      description: 검색 항목
+      type: string
+    - name: searchValue
+      in: query
+      required: false
+      description: 검색값
+      type: string
+    - name: limit
+      in: query
+      required: true
+      type: int
+    - name: offset
+      in: query
+      required: true
+      type: int      
+    get:
+      tags:
+      - basic
+      summary: 게시판 글을 조회한다.
+      description: ''      
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+
+
+
+definitions:  
+  Symbol:
+    type: object
+    properties:
+      symbol:
+        type: string
+      priceUnit:
+        type: double
+        description: '금액 단위' 
+      minAmount1:
+        type: double
+        description: '최소 거래 가능 수량1' 
+      minAmount2:
+        type: double
+        description: '최소거래수량2' 
+      symbolType:
+        type: string
+        description: '1:코인/코인 2:코인/법정화폐'
+      tradeFee:
+        type: double
+        decscription: '거래 수수료율'
+
+  Currency:
+    type: object
+    properties:
+      coin:
+        type: string
+      coinName:
+        type: string
+      coinType:
+        type: string
+        description: '1 : 암호화폐 2 : 법정화폐' 
+      transactionFee:
+        type: double
+
+  Board:
+    type: object
+    properties:
+      boardCode:
+        type: string
+      boardName:
+        type: string
+        
+  Article:
+    type: object
+    properties:
+      articleIdx:
+        type: int
+      subject:
+        type: string
+      content:
+        type: string
+        

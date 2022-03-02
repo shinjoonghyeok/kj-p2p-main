@@ -1,0 +1,207 @@
+paths:
+  "/account/insert":
+    post:
+      tags:
+      - account
+      summary: 코인을 송금정보를 입력한다(관리자용)
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties :
+                coin:
+                  type: string
+                  description: 암호화폐 ex) BTC
+                uid:
+                  type: string
+                  description: 고객코드
+                amount:
+                  type: double
+                txHash:
+                  type: string
+                  description: 거래 해쉬                
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+  "/account/list":
+    parameters:
+    - name: startDate
+      in: query
+      required: true
+      description: 시작일
+      type: string
+    - name: endDate
+      in: query
+      required: true
+      description: 종료일
+      type: string
+    - name: searchKey
+      in: query
+      required: false
+      description: 검색 항목
+      type: string
+    - name: searchValue
+      in: query
+      required: false
+      description: 검색값
+      type: string
+    - name: limit
+      in: query
+      required: true
+      type: int
+    - name: offset
+      in: query
+      required: true
+      type: int
+    get:
+      tags:
+      - account
+      summary: 거래 정보를 조회한다.
+      description: ''      
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      security:
+      - idtoken: []
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input          
+  "/account/withdraw/insert":
+    post:
+      tags:
+      - account
+      summary: 보관되어 있는 코인을 찾는다.
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties :
+                coin:
+                  type: string
+                  description: 암호화폐 ex) BTC
+                amount:
+                  type: string
+                  description: 금액
+                amount:
+                  type: double
+                withdrawAddress:
+                  type: string
+                  description: 출금주소
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input                  
+  "/account/withdraw/list":
+    parameters:
+    - name: startDate
+      in: query
+      required: true
+      description: 시작일
+      type: string
+    - name: endDate
+      in: query
+      required: true
+      description: 종료일
+      type: string
+    - name: searchKey
+      in: query
+      required: false
+      description: 검색 항목
+      type: string
+    - name: searchValue
+      in: query
+      required: false
+      description: 검색값
+      type: string
+    - name: limit
+      in: query
+      required: true
+      type: int
+    - name: offset
+      in: query
+      required: true
+      type: int
+    get:
+      tags:
+      - account
+      summary: 출금신청 정보를 조회한다.
+      description: ''      
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      security:
+      - idtoken: []
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input                            
+  "/account/withdraw/confirm":
+    parameters:
+    - name: withdrawIdx
+      in: query
+      required: true
+      description: 출금번호
+      type: int
+    get:
+      tags:
+      - account
+      summary: 출금신청을 승인한다.
+      description: ''      
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      security:
+      - idtoken: []
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+  "/account/withdraw/cancel":
+    parameters:
+    - name: withdrawIdx
+      in: query
+      required: true
+      description: 출금번호
+      type: int
+    get:
+      tags:
+      - account
+      summary: 출금신청을 거부한다.
+      description: ''      
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      security:
+      - idtoken: []
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input

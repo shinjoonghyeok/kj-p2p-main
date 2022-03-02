@@ -1,0 +1,742 @@
+paths:
+  "/user/checkemail/{email}":
+    parameters:
+    - name: email
+      in: path
+      required: true
+      description: 이메일 주소
+      type: strings    
+    get:
+      tags:
+      - user
+      summary: 가입된 이메일이 있는지 확인한다.
+      description: '' 
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input 
+
+  "/user/checkemailtel":
+    parameters:
+    - name: email
+      in: query
+      required: true
+      description: 이메일 주소
+      type: strings    
+    - name: tel
+      in: query
+      required: true
+      description: 전화번호
+      type: strings    
+    get:
+      tags:
+      - user
+      summary: 가입된 이메일이 있는지 확인한다.
+      description: '' 
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input 
+  "/user/getemail":
+    parameters:
+    - name: tel
+      in: query
+      required: true
+      description: 전화번호
+      type: strings    
+    get:
+      tags:
+      - user
+      summary: 전화번호로 등록된 이메일을 가져온다.
+      description: '' 
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input           
+  "/user/insert":
+    post:
+      tags:
+      - user
+      summary: 사용자 정보를 등록한다
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              "$ref": "#/definitions/User"
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+  "/user/update":
+    post:
+      tags:
+      - user
+      summary: 사용자 정보를 수정한다.
+      description: ''
+      security:
+      - idtoken: []
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              "$ref": "#/definitions/User"
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+  "/user/select":
+    get:
+      tags:
+      - user
+      summary: 사용자 정보를 가져온다. 토큰에서 uid를 입력 받는다.
+      description: ''
+      security:
+      - idtoken: []
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+  "/user/balance/{coin}":
+    parameters:         
+    - name: coin
+      in: path
+      required: true
+      description: 코인명 ex)BTC, ETH
+      type: strings   
+    get:
+      tags:
+      - user
+      summary: 고객의 잔고를 가져온다.
+      description: ''
+      security:
+      - idtoken: []
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+          
+  "/user/wallet/{coin}":
+    parameters:         
+    - name: coin
+      in: path
+      required: true
+      description: 코인명 ex)BTC, ETH
+      type: strings   
+    get:
+      tags:
+      - user
+      summary: 고객의 지갑 주소
+      description: ''
+      security:
+      - idtoken: []
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input  
+  "/user/account/{coin}":
+    parameters:         
+    - name: coin
+      in: path
+      required: true
+      description: 코인명 ex)BTC, ETH
+      type: strings   
+    get:
+      tags:
+      - user
+      summary: 고객이 코인을 입금하여야 할 주소
+      description: ''
+      security:
+      - idtoken: []
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input            
+
+  "/user/recieveinfo/list":
+    get:
+      tags:
+      - user
+      summary: 입금 정보를 가져온다
+      description: ''
+      security:
+      - idtoken: []
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+  "/user/recieveinfo/update":
+    post:
+      tags:
+      - user
+      summary: 입금 정보를 수정한다.
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:  
+                coin: 
+                  type: string  
+                bank: 
+                  type: string  
+                account: 
+                  type: string  
+                owner: 
+                  type: string  
+                coinAddress: 
+                  type: string  
+                swift:
+                  type: string
+                  description: SWIFT
+                branchCode:
+                  type: string
+                  description: 지점코드
+                branchAddress:
+                  type: string
+                  description: 지점주소  
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+
+
+
+  "/user/kyc/apply":
+    post:
+      tags:
+      - user
+      summary: KYC 정보를 입력 수정한다.
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              "$ref": "#/definitions/KYC"          
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+
+
+  "/user/kyc/select":
+    get:
+      tags:
+      - user
+      summary: KYC 입력 정보를 가져온다. 토큰에서 uid를 입력 받는다.
+      description: ''
+      security:
+      - idtoken: []
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+
+  "/user/claim/insert":
+    post:
+      tags:
+      - user
+      summary: 신고를 접수한다
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object 
+              properties:  
+                tradeIdx: 
+                  type: int
+                  description: 거래번호  
+                subject:
+                  type: string
+                message: 
+                  type: string  
+                file: 
+                  type: string  
+                  format: binary
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input      
+
+  "/user/claim/select/{claimIdx}":
+    parameters:
+    - name: claimIdx
+      in: path
+      required: true
+      description: 신고번호
+      type: int    
+    get:
+      tags:
+      - user
+      summary: 신고 내용을 조회한다.
+      description: ''
+      security:
+      - idtoken: []
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+  
+  "/user/claim/list":
+    parameters:
+    - name: startDate
+      in: query
+      required: true
+      description: 시작일
+      type: string
+    - name: endDate
+      in: query
+      required: true
+      description: 종료일
+      type: string
+    - name: searchKey
+      in: query
+      required: false
+      description: 검색 항목
+      type: string
+    - name: searchValue
+      in: query
+      required: false
+      description: 검색값
+      type: string
+    - name: limit
+      in: query
+      required: true
+      type: int
+    - name: offset
+      in: query
+      required: true
+      type: int    
+    get:
+      tags:
+      - user
+      summary: 신고 내용을 조회한다.
+      description: ''
+      security:
+      - idtoken: []
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+          
+          
+  "/user/message/insert":
+    post:
+      tags:
+      - user
+      summary: 신고 관련 메세지를 보낸다
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object 
+              properties:  
+                claimIdx: 
+                  type: int
+                  description: 신고번호  
+                message: 
+                  type: string  
+                file: 
+                  type: string  
+                  format: binary
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input  
+
+  "/user/message/read/{idx}":
+    parameters:
+    - name: idx
+      in: path
+      required: true
+      description: 메세지 번호
+      type: int    
+    get:
+      tags:
+      - user
+      summary: 메세지 수신 여부를 기록한다
+      description: ''
+      security:
+      - idtoken: []
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+          
+  "/user/message/list/{claimIdx}":
+    parameters:
+    - name: claimIdx
+      in: path
+      required: true
+      description: 신고번호
+      type: int    
+    get:
+      tags:
+      - user
+      summary: 신고 관련 주고 받은 메세지 리스트를 보여준다
+      description: ''
+      security:
+      - idtoken: []
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+     
+  "/admin/user/update":
+    post:
+      tags:
+      - user
+      summary: 사용자 정보를 수정한다.
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              "$ref": "#/definitions/User"
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+  "/admin/user/select/{uid}":
+    parameters:
+    - name: uid
+      in: path
+      required: true
+      description: 사용자 키
+      type: int
+    get:
+      tags:
+      - user
+      summary: 사용자 정보를 가져온다.
+      description: ''
+      security:
+      - idtoken: []
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input  
+  "/admin/user/list":
+    parameters:
+    - name: searchKey
+      in: query
+      required: false
+      description: 검색 항목
+      type: string
+    - name: searchValue
+      in: query
+      required: false
+      description: 검색값
+      type: string
+    - name: limit
+      in: query
+      required: true
+      type: int
+    - name: offset
+      in: query
+      required: true
+      type: int
+    get:
+      tags:
+      - user
+      summary: 사용자 정보를 조회한다.
+      description: ''
+      security:
+      - idtoken: []
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+
+  "/admin/user/kyc/select/{uid}":
+    parameters:
+    - name: uid
+      in: path
+      required: true
+      description: 사용자 키
+      type: int
+    get:
+      tags:
+      - user
+      summary: KYC 입력 정보를 가져온다.
+      description: ''
+      security:
+      - idtoken: []
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+  "/admin/user/kyc/confirm/{uid}":
+    parameters:
+    - name: uid
+      in: path
+      required: true
+      description: 사용자 키
+      type: string
+    get:
+      tags:
+      - user
+      summary: KYC를 승인한다
+      description: ''
+      security:
+      - idtoken: []
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+  "/admin/user/kyc/refuse/{uid}":
+    parameters:
+    - name: uid
+      in: path
+      required: true
+      description: 사용자 키
+      type: string
+    get:
+      tags:
+      - user
+      summary: KYC 승인을 반려한다.
+      description: ''
+      security:
+      - idtoken: []
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+
+  "/admin/user/kyc/list":
+    parameters:
+    - name: searchKey
+      in: query
+      required: false
+      description: 검색 항목
+      type: string
+    - name: searchValue
+      in: query
+      required: false
+      description: 검색값
+      type: string
+    - name: limit
+      in: query
+      required: true
+      type: int
+    - name: offset
+      in: query
+      required: true
+      type: int
+    get:
+      tags:
+      - user
+      summary: 사용자 정보를 조회한다.
+      description: ''
+      security:
+      - idtoken: []
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+
+definitions:
+  User:
+    type: object
+    properties:
+      uid:
+        type: string
+      email:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      userState:
+        type: string
+        description: '0:회원등록 1:KYC완료' 
+      role:
+        type: string
+        description: '0:일반유저 1:관리자' 
+      activeYN:
+        type: string
+        description: 'Y:활동N:정지' 
+      tel:
+        type: string
+      otp:
+        type: string
+      language:
+        type: string
+      referal:
+        type: string
+      referalEmail:
+        type: string      
+  
+
+  KYC: 
+    type: object 
+    properties:  
+      uid: 
+        type: string  
+      birthDay: 
+        type: string  
+      sex:
+        type: string
+      address1: 
+        type: string  
+      address2: 
+        type: string  
+      city: 
+        type: string  
+      country: 
+        type: string  
+      certImg1: 
+        type: string  
+        format: binary
+      certImg2: 
+        type: string  
+        format: binary
+      confirmState: 
+        type: string  
+                

@@ -1,0 +1,623 @@
+paths:
+  "/trade/insert":
+    post:
+      tags:
+      - trade
+      summary: 거래를 등록한다(Maker)
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties :
+                symbol:
+                  type: string
+                  description: 통화쌍 ex) BTC/KJ
+                orderSide:
+                  type: string
+                  description: "B:Buy, S:Sell"
+                price:
+                  type: double
+                amount:
+                  type: double
+                bank:
+                  type: string
+                account:
+                  type: string
+                owner:
+                  type: string
+                coinAddress:
+                  type: string
+                swift:
+                  type: string
+                  description: SWIFT
+                branchCode:
+                  type: string
+                  description: 지점코드
+                branchAddress:
+                  type: string
+                  description: 지점주소
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+  "/trade/update":
+    post:
+      tags:
+      - trade
+      summary: 거래 정보를 수정한다(Maker)
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              "$ref": "#/definitions/Trade"
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+  "/trade/select/{tradeIdx}":
+    parameters:
+    - name: tradeIdx
+      in: path
+      required: true
+      description: 거래번호
+      type: int
+    get:
+      tags:
+      - trade
+      summary: 거래 정보(Maker)를 가져온다.
+      description: ''      
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      security:
+      - idtoken: []
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+  "/trade/openList":
+    parameters:
+    - name: symbol
+      in: query
+      required: false
+      description: 통화쌍 ex) BTC/USD
+      type: string
+    - name: orderSide
+      in: query
+      required: false
+      description: "B:매도, S:매수"
+      type: string
+    - name: limit
+      in: query
+      required: true
+      type: int
+    - name: offset
+      in: query
+      required: true
+      type: int
+    get:
+      tags:
+      - trade
+      summary: 거래 정보를 조회한다.
+      description: ''      
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      security:
+      - idtoken: []
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input          
+  "/trade/recentList":
+    parameters:
+    - name: symbol
+      in: query
+      required: false
+      description: 통화쌍 ex) BTC/USD
+      type: string    
+    - name: limit
+      in: query
+      required: true
+      type: int    
+    get:
+      tags:
+      - trade
+      summary: 최근 완료된 거래 내역을 보여준다.
+      description: ''      
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      security:
+      - idtoken: []
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input                    
+  "/trade/depositList":
+    get:
+      tags:
+      - trade
+      summary: 자신과 상대방이 입금해야할 진행 중인 거래 목록
+      description: ''      
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      security:
+      - idtoken: []
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input                 
+  "/trade/list":
+    parameters:
+    - name: startDate
+      in: query
+      required: true
+      description: 시작일
+      type: string
+    - name: endDate
+      in: query
+      required: true
+      description: 종료일
+      type: string
+    - name: searchKey
+      in: query
+      required: false
+      description: 검색 항목
+      type: string
+    - name: searchValue
+      in: query
+      required: false
+      description: 검색값
+      type: string
+    - name: limit
+      in: query
+      required: true
+      type: int
+    - name: offset
+      in: query
+      required: true
+      type: int
+    get:
+      tags:
+      - trade
+      summary: 거래 정보를 조회한다.
+      description: ''      
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      security:
+      - idtoken: []
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+  "/trade/listComplete":
+    parameters:
+    - name: limit
+      in: query
+      required: true
+      type: int
+    - name: offset
+      in: query
+      required: true
+      type: int
+    get:
+      tags:
+      - trade
+      summary: 거래 완료 내역을 조회한다.
+      description: ''      
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      security:
+      - idtoken: []
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input          
+  "/trade/listCancel":
+    parameters:
+    - name: limit
+      in: query
+      required: true
+      type: int
+    - name: offset
+      in: query
+      required: true
+      type: int
+    get:
+      tags:
+      - trade
+      summary: 거래 취소 내역을 조회한다
+      description: ''      
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      security:
+      - idtoken: []
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input                    
+  "/trade/order/insert":
+    post:
+      tags:
+      - trade
+      summary: 거래를 등록한다(Taker)
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                tradeIdx:
+                  type: int
+                  description: 거래번호
+                bank:
+                  type: string
+                  description: 은행명
+                account:
+                  type: string
+                  description: 계좌번호
+                owner:
+                  type: string
+                  description: 예금주
+                coinAddress:
+                  type: string
+                  description: 출금 코인 주소
+                swift:
+                  type: string
+                  description: SWIFT
+                branchCode:
+                  type: string
+                  description: 지점코드
+                branchAddress:
+                  type: string
+                  description: 지점주소
+
+
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input
+  "/trade/bank/deposit":
+    post:
+      tags:
+      - trade
+      summary: 현금을 송금하고 확인 요청을 한다.
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                tradeIdx:
+                  type: int
+                  description: 주문번호
+                sender:
+                  type: string
+                  description: 송금자명
+                depositAt:
+                  type: string
+                  description: 송금 ex) 2020-10-01
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input          
+  "/trade/bank/confirm":
+    post:
+      tags:
+      - trade
+      summary: 은행 송금을 확인한다.
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                tradeIdx:
+                  type: int
+                  description: 주문번호
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input                    
+  "/trade/confirm":
+    post:
+      tags:
+      - trade
+      summary: 거래를 확정한다.
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                tradeIdx:
+                  type: int
+                  description: 주문번호
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input                    
+  "/trade/cancel":
+    post:
+      tags:
+      - trade
+      summary: 거래를 취소한다.
+      description: 
+      security:
+      - idtoken: []
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                tradeIdx:
+                  type: int
+                  description: 주문번호
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input         
+
+  "/trade/recieveInfo":
+    parameters:
+    - name: symbol
+      in: query
+      required: true
+      description: 통화쌍
+      type: string  
+    - name: orderSide
+      in: query
+      required: true
+      description: "B:Buy, S:Sell"
+      type: string  
+    get:
+      tags:
+      - trade
+      summary: 코인을 받을 주소 / 입금 받을 계좌 번호를 받는다
+      description: ''      
+      consumes:
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
+      security:
+      - idtoken: []
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input           
+  "/lp/order":
+    post:
+      tags:
+      - trade
+      summary: 거래를 등록한다(Maker)
+      description:       
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties :
+                uid:
+                  type: string
+                symbol:
+                  type: string
+                  description: 통화쌍 ex) BTC/KJ
+                orderSide:
+                  type: string
+                  description: "B:Buy, S:Sell"
+                price:
+                  type: double
+                amount:
+                  type: double                
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input                    
+  "/lp/cancel":
+    post:
+      tags:
+      - trade
+      summary: 거래를 취소한다.
+      description:       
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties :
+                uid:
+                  type: string
+                orderID:
+                  type: number
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input                    
+  "/lp/info":
+    post:
+      tags:
+      - trade
+      summary: 거래 정보를 가져온다.
+      description:       
+      produces:
+      - application/json
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties :
+                uid:
+                  type: string
+                orderID:
+                  type: number              
+      responses:
+        '200':
+          description: 'ecode: 0 = success '
+        '400':
+          description: Invalid input                    
+    
+
+definitions:
+  Trade:
+    type: object
+    properties:
+      tradeIdx:
+        type: int
+      uidMaker:
+        type: string
+      symbol:
+        type: string
+      orderSide:
+        type: string
+        description: '1:buy2:sell'
+      amount1:
+        type: double
+      amount2:
+        type: double
+      tradeState:
+        type: string
+        description: '0: 개설 1:입금대기 2:거래완료 3:취소'
+      makerState:
+        type: string
+        description: '0:입금대기 1:입금확인요청법정통화 거래시 2:입금완료 3: 거래취소'
+      orderAt:
+        type: string
+      depositConfirm:
+        type: string
+        description: '0:확인요청 1:확인완료' 
+      confirmAt:
+        type: string
+      bank:
+        type: string
+      account:
+        type: string
+      owner:
+        type: string
+      depositAt:
+        type: string
+      sender:
+        type: string
+      coinAddress:
+        type: string
+      comment:
+        type: string
+
+  Order:
+    type: object
+    properties:
+      orderIdx:
+        type: int
+      tradeIdx:
+        type: int
+      uidTaker:
+        type: string
+      takerState:
+        type: string
+        description: '0:입금대기 1:입금확인요청법정통화 거래시 2:입금완료 3: 거래취소'
+      orderAt:
+        type: string
+      depositConfirm:
+        type: string
+        description: '0:확인요청 1:확인완료' 
+      confirmAt:
+        type: string
+      bank:
+        type: string
+      account:
+        type: string
+      owner:
+        type: string
+      depositAt:
+        type: string
+      sender:
+        type: string
+      coinAddress:
+        type: string

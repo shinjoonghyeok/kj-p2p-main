@@ -1,0 +1,30 @@
+---
+openapi: 3.0.0
+info:
+  description: 멀티 월렛 / KJ플랫폼을 위한 API를 제공합니다. 오늘따리
+  title: KJ 플랫폼
+  version: v.2020-03-10
+  contact:
+    email: hongdoit@gmail.com
+host: localhost:21301
+externalDocs:
+  description: KJ그룹 글로벌 홈페이지
+  url: https://kjgroup.global
+schemes:
+- http
+consumes:
+- application/json
+produces:
+- application/json
+components:
+  securitySchemes:
+    publisher_jwt:
+      type: apiKey
+      name: token
+      in: header
+      description: "basic 섹션의  '/publisher/get/token' API호출로 받은 token을 등록 하세요 \n "
+    idtoken:
+      type: apiKey
+      name: idtoken
+      in: header
+      description: firebase authentication accessToken을 넣으세요.
